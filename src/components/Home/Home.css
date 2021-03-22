@@ -1,0 +1,13 @@
+body {
+  background: url("../../images/fest.jpg") no-repeat center fixed;
+  background-size: cover;
+}
+
+.cnt {
+  float: left;
+  margin-top: 30px;
+}
+
+.btn {
+  margin-top: 200px !important;
+}
