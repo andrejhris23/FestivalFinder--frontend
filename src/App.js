@@ -1,17 +1,17 @@
 import './App.css';
-import SearchFestivals from '../src/components/SearchFestivals/SearchFestivals';
-import Home from './components/Home/Home';
+import SearchFestivals from '../src/components/SearchFestivals/SearchFestivals.jsx';
+// import Home from './components/Home/Home';
 
 
 function App() {
   return (
-    <div className="App">
+    // <div className="App">
 
 
-      {/* <SearchFestivals></SearchFestivals> */}
-      <Home></Home>
+      <SearchFestivals></SearchFestivals>
+      
 
-    </div>
+    // </div>
   );
 }
 
