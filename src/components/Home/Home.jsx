@@ -7,7 +7,7 @@ function Home() {
   return (
     <div>
       <Container className="cnt" text>
-        <Header as="h1">Welcome to the Festival Finder App!</Header>
+        <Header as="h1">Welcome to the Festival Finder App</Header>
         <p>Find the right festival for you!</p>
         <Button
           icon="google"
@@ -15,7 +15,7 @@ function Home() {
           circular="true"
           size="massive"
           content="Sign in with Google"
-          secondary
+          color="google plus"
         />
       </Container>
     </div>
