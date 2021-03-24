@@ -6,12 +6,14 @@ const UsersAndFestivalsService = {
         return axios.get(`/user/searchFestivals/${country}/${genre}`);
     },
 
-    addFestivalToUser: () => {
-
+    addFestivalToUser: (festival, userId) => {
+        return axios.patch(`/user/addFestival/${userId}`, festival);
     },
 
-    removeFestivalFromUser: () => {
-
+    removeFestivalFromUser: (festivalId, userId) => {
+        return axios.patch(`/users/removeFestival/${userId}`, {
+            festivalId
+        });
     }
 };
 
