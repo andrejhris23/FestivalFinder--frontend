@@ -4,7 +4,7 @@ const AuthService = {
 
     // Mozebi ne treba return
     userLogIn: () => {
-       return axios.get('/auth/google');
+       return axios.get('/auth/google')
     }
 }
 
