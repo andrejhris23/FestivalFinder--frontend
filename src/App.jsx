@@ -6,6 +6,7 @@ import Home from "./components/Home/Home";
 import Festivals from "./components/Festivals/Festival";
 
 function App() {
+  
   return (
     <BrowserRouter>
       <Switch>

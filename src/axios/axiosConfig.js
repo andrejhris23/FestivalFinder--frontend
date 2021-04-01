@@ -3,9 +3,11 @@ import { SERVER_URL } from "../shared/constants";
 
 const instance = axios.create({
   baseURL: SERVER_URL,
+  withCredentials: true,
   headers: {
-    "Access-Control-Allow-Origin": "*",
-    withCredentials: true,
+    Accept: "application/json",
+    "Content-Type": "application/json",
+   "Access-Control-Allow-Credentials": true,
   },
 });
 
