@@ -23,16 +23,22 @@ const SearchFestivals = (props) => {
         { key: 'as8', value: 'Other', icon: 'music', text: 'Other genre' }
     ]
 
-
+    // set by inputs
     const [country, setCountry] = useState('');
     const [genre, setGenre] = useState('');
+
     const [showModal, setShowModal] = useState(false);
+    const [showNoFestivalFoundMsg, setShowNoFestivalFoundMsg] = useState(false);
+    // set from API
     const [festivals, setFestivals] = useState([]);
 
 
     const handleCountrySearchChange = (e) => {
         e.preventDefault();
-        setCountry(e.target.value);
+        const theCountry = e.target.value;
+        const theCountryFormated = theCountry.replace(' ','_');
+    
+        setCountry(theCountryFormated);
     }
 
     const handleGenreChange = (e, data) => {
@@ -42,10 +48,12 @@ const SearchFestivals = (props) => {
     }
 
     const handleSearchButtonClick = (e) => {
+        
         if(country !== '' && genre !== ''){
             usersAndFestivalsService.searchFestivals(country, genre).then(resp => {
                 console.log(resp.data);
                 setFestivals(resp.data);
+                setShowNoFestivalFoundMsg(true);    
             });
         }
         else{
@@ -58,76 +66,248 @@ const SearchFestivals = (props) => {
     return (
         <>
             
-            <Container>
+            <Container className='search-fest-container'>
 
-                <Grid divided='vertically'>
-                    <Grid.Row columns={3}>
+                <div className='festival-grid-outer-div'>
+                    <Grid divided='vertically'>
 
-                        <Grid.Column>
-                            <Label className='search-elements'>Search country:</Label>
-                            <Search
-                                type='text'
-                                size='big'
-                                showNoResults={false}
-                                onSearchChange={handleCountrySearchChange}
-                                className='search-bar search-elements'
-                            />
-                    
-                            <Dropdown
-                                placeholder='Select Genre'
-                                fluid
-                                search
-                                selection
-                                options={genreOptions}
-                                onChange={handleGenreChange}
-                                className='genre-dropdown search-elements'
-                            />
+                        <Grid.Row columns={2}>
 
-                            <Button 
-                                secondary
-                                onClick={handleSearchButtonClick}
-                                size='big'
-                                className='search-elements'
-                            >
-                                SEARCH
-                            </Button>
+                            <Grid.Column width='4'>
+                                <Label color='black' size='huge' className='search-fest-label'>SEARCH COUNTRY:</Label>
+                                <br/><br/>
+                                <Search
+                                    type='text'
+                                    size='big'
+                                    showNoResults={false}
+                                    onSearchChange={handleCountrySearchChange}
+                                    className='search-bar'
+                                />
+                        
+                                <Dropdown
+                                    placeholder='Select Genre'
+                                    fluid
+                                    search
+                                    selection
+                                    options={genreOptions}
+                                    onChange={handleGenreChange}
+                                    className='genre-dropdown'
+                                />
 
-                            <Modal open={showModal}>
-                                <Modal.Content>
-                                    Country or genre is empty!
-                                    <Button
-                                     onClick={()=>{setShowModal(false)}}
-                                     className='modal-btn'>
-                                        Ok
-                                    </Button>
-                                </Modal.Content>
-                            </Modal>
-                        </Grid.Column>
+                                <Button 
+                                    secondary
+                                    onClick={handleSearchButtonClick}
+                                    size='big'
+                                    className=''
+                                >
+                                    SEARCH
+                                </Button>
 
-                        <Grid.Column>
-                            
-                            {
-                                festivals.map(f => {
-                                    return <Card>
-                                        <Image src={f.image} wrapped ui={false}/>
-                                        <Card.Content>
-                                            <Card.Description>
-                                                {f.name}
-                                            </Card.Description>
-                                        </Card.Content>
-                                    </Card>
-                                })
-                            }
-                        </Grid.Column>
+                                <Modal open={showModal}>
+                                    <Modal.Content>
+                                        Country or genre is empty!
+                                        <Button
+                                        onClick={()=>{setShowModal(false)}}
+                                        className='modal-btn'>
+                                            Ok
+                                        </Button>
+                                    </Modal.Content>
+                                </Modal>
+                            </Grid.Column>
 
-                    </Grid.Row>
+                            <Grid.Column>
 
-                </Grid>
+                                    {/* Uste eden grid za festivalite */}
+                                    <Grid className='festivals-grid' columns={3}>
+                                        <Grid.Row>
+                                            
+                                            {
+                                                (festivals.length === 0 && showNoFestivalFoundMsg) ?
+                                                    <Label color='red' 
+                                                        size='huge'
+                                                        className='search-fest-label'>
+                                                    No festivals found for this country & genre!</Label> :
+
+
+
+                                                    festivals.map(f => {
+
+                                                        return f.image ? 
+                                                        <Grid.Column className='festival-card' key={f.name}>   
+                                                            <Card>
+                                                                <Image src={f.image} wrapped ui={false}/>
+                                                                <Card.Content>
+                                                                    <Card.Description>
+                                                                        <Label color='black'
+                                                                            tag={true} 
+                                                                            size='medium'
+                                                                            className='fest-info-label'>
+                                                                            Name:</Label>
+                                                                        {' '+f.name}
+                                                                        <br/>
+
+
+                                                                        <Label color='black'
+                                                                            tag={true} 
+                                                                            size='medium'
+                                                                            className='fest-info-label'>
+                                                                            Locations:</Label>
+                                                                        
+                                                                        {f.locations.length === 0 ?
+                                                                        <p>/</p> :
+                                                                        f.locations.reduce((p, n)=> p+' | '+n)
+                                                                        }
+                                                                        
+                                                                        <br/>
+
+                                                                        <Label color='black'
+                                                                            tag={true} 
+                                                                            size='medium'
+                                                                            className='fest-info-label'>
+                                                                            Dates:</Label>
+
+                                                                        {f.dates.length === 0?
+                                                                        <p>/</p>:
+                                                                        f.dates.reduce((p, n)=> p+' | '+n)                    
+                                                                        }
+                                                                        <br/>
+
+                                                                        <Label color='black'
+                                                                            tag={true} 
+                                                                            size='medium'
+                                                                            className='fest-info-label'>
+                                                                            Genres:</Label>
+                                                                        {f.genres.length === 0?
+                                                                        <p>/</p>:
+                                                                        ' '+f.genres.reduce((p, n)=> p+' | '+n)
+                                                                        }
+                                                                        <br/>
+
+                                                                        <Label color='black'
+                                                                            tag={true} 
+                                                                            size='medium'
+                                                                            className='fest-info-label'>
+                                                                            Websites:</Label>
+                                                                        {f.websites.map(ws => {
+                                                                            return ws.length < 50 ?
+                                                                            <div className='fstvl-website-link'>
+                                                                                <a href={ws}>{ws}</a>
+                                                                            </div> :
+                                                                            <div className='fstvl-website-link'>
+                                                                                <a href={ws}>{ws.slice(1,35)}...</a>
+                                                                            </div>
+                                                                            
+                                                                        })}
+
+                                                                        <div>
+                                                                            <Button color='green'>Save</Button>
+                                                                        </div>
+                                                                    </Card.Description>
+                                                                </Card.Content>
+                                                            </Card>
+                                                        </Grid.Column>   
+                                                        :
+                                                        <Grid.Column className='festival-card' key={f.name}>   
+                                                            <Card>
+                                                                <div className='image'>
+                                                                    <img className='fstvl_img_not_found' src="https://i.ibb.co/jJgFNK1/facebook-profile-image.png" alt='no img found'/>
+                                                                </div>
+                                                                <Card.Content>
+                                                                    <Card.Description>
+                                                                        <Label color='black'
+                                                                            tag={true} 
+                                                                            size='medium'
+                                                                            className='fest-info-label'>
+                                                                            Name:</Label>
+                                                                        {' '+f.name}
+                                                                        <br/>
+
+
+                                                                        <Label color='black'
+                                                                            tag={true} 
+                                                                            size='medium'
+                                                                            className='fest-info-label'>
+                                                                            Locations:</Label>
+                                                                        
+                                                                        {f.locations.length === 0 ?
+                                                                        <p>/</p> :
+                                                                        f.locations.reduce((p, n)=> p+' | '+n)
+                                                                        }
+                                                                        
+                                                                        <br/>
+
+                                                                        <Label color='black'
+                                                                            tag={true} 
+                                                                            size='medium'
+                                                                            className='fest-info-label'>
+                                                                            Dates:</Label>
+
+                                                                        {f.dates.length === 0?
+                                                                        <p>/</p>:
+                                                                        f.dates.reduce((p, n)=> p+' | '+n)                    
+                                                                        }
+                                                                        <br/>
+
+                                                                        <Label color='black'
+                                                                            tag={true} 
+                                                                            size='medium'
+                                                                            className='fest-info-label'>
+                                                                            Genres:</Label>
+                                                                        {f.genres.length === 0?
+                                                                        <p>/</p>:
+                                                                        ' '+f.genres.reduce((p, n)=> p+' | '+n)
+                                                                        }
+                                                                        <br/>
+
+                                                                        <Label color='black'
+                                                                            tag={true} 
+                                                                            size='medium'
+                                                                            className='fest-info-label'>
+                                                                            Websites:</Label>
+                                                                        {f.websites.map(ws => {
+                                                                            return ws.length < 50 ?
+                                                                            <div className='fstvl-website-link'>
+                                                                                <a href={ws}>{ws}</a>
+                                                                            </div> :
+                                                                            <div className='fstvl-website-link'>
+                                                                                <a href={ws}>{ws.slice(1,35)}...</a>
+                                                                            </div>
+                                                                            
+                                                                        })}
+
+                                                                        <div>
+                                                                            <Button color='green'>Save</Button>
+                                                                        </div>
+
+                                                                    </Card.Description>
+                                                                </Card.Content>
+                                                            </Card>
+                                                        </Grid.Column>   
+                                                    })
+                                            }
+                                            
+                                        </Grid.Row>
+                                    </Grid>
+                                
+
+                
+                            </Grid.Column>
+
+                        </Grid.Row>
+                        
+
+                    </Grid>
+                </div>
                 
             </Container>
 
+            
+            
+
         </>
     )
+
+    
 
 }
 
