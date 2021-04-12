@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
 import SearchFestivals from "../src/components/SearchFestivals/SearchFestivals";
 import Home from "./components/Home/Home";
-import Festivals from "./components/Festivals/Festival";
+
 
 function App() {
   
@@ -12,7 +12,7 @@ function App() {
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/search" exact component={SearchFestivals} />
-        <Route path="/myFestivals" exact component={Festivals} />
+        <Route path="/myFestivals" exact component={<></>} />
       </Switch>
     </BrowserRouter>
   );
