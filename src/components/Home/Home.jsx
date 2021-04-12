@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import authService from "../../service/authService";
 import Axios from "axios";
 import { Container, Header, Button } from "semantic-ui-react";
@@ -6,10 +6,12 @@ import "semantic-ui-css/semantic.min.css";
 import "./Home.css";
 import { SERVER_URL } from '../../shared/constants';
 import { Redirect, useHistory } from "react-router";
+import { UserContext } from '../../contexts/UserContext';
 
 function Home() { 
 
   let history = useHistory();
+  const { user, setUser } = useContext(UserContext)
     
    useEffect(() => {
       waitUser();
@@ -17,9 +19,12 @@ function Home() {
 
   const waitUser = async() => {
     const user  = await authService.fetchUser();
-      console.log(user)
-      if(typeof(user)) 
-      history.push('/myFestivals')
+    console.log(user)
+
+    setUser(user)
+
+    if(typeof(user)) 
+    history.push('/myFestivals')
   }
  
   const loginUser = (e) => {

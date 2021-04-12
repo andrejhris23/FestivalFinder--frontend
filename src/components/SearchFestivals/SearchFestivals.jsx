@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Container, Search, Dropdown , Label, Grid, Button, Modal, Card, Image } from 'semantic-ui-react';
+import { Container, Search, Dropdown , Label, Grid, Button, Modal } from 'semantic-ui-react';
 import usersAndFestivalsService from '../../service/usersAndFestivalsService';
 import './SearchFestivals.css'
 import 'semantic-ui-css/semantic.min.css';

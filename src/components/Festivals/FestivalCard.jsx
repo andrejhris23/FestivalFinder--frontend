@@ -1,9 +1,18 @@
 import { Label, Grid, Button, Card, Image } from 'semantic-ui-react';
+import { useContext } from 'react';
+import { UserContext } from '../../contexts/UserContext';
 
 
 const FestivalCard = ({f}) => {
 
-    console.log(f)
+    const { user, setUser } = useContext(UserContext)
+
+    const handleSaveFestivalClick = (fest) => {
+        console.log(fest)
+
+        console.log(user)
+
+    }
 
     return(
         <>  
@@ -81,7 +90,9 @@ const FestivalCard = ({f}) => {
                             })}
 
                             <div>
-                                <Button color='green'>Save</Button>
+                                <Button color='green'
+                                    onClick={() => handleSaveFestivalClick(f)}
+                                >Save</Button>
                             </div>
                         </Card.Description>
                     </Card.Content>
