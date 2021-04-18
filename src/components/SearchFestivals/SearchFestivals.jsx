@@ -3,7 +3,7 @@ import { Container, Search, Dropdown , Label, Grid, Button, Modal } from 'semant
 import usersAndFestivalsService from '../../service/usersAndFestivalsService';
 import './SearchFestivals.css'
 import 'semantic-ui-css/semantic.min.css';
-import FestivalCard from '../Festivals/FestivalCard';
+import FestivalCard from '../FestivalCards/FestivalCard';
 
 
 const SearchFestivals = (props) => {

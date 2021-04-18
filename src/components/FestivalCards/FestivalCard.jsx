@@ -1,6 +1,7 @@
 import { Label, Grid, Button, Card, Image } from 'semantic-ui-react';
 import { useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
+import UsersAndFestivalsService from '../../service/usersAndFestivalsService';
 
 
 const FestivalCard = ({f}) => {
@@ -11,6 +12,8 @@ const FestivalCard = ({f}) => {
         console.log(fest)
 
         console.log(user)
+
+        UsersAndFestivalsService.addFestivalToUser(fest, user.id);
 
     }
 

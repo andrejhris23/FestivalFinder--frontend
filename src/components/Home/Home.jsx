@@ -19,9 +19,10 @@ function Home() {
 
   const waitUser = async() => {
     const user  = await authService.fetchUser();
-    console.log(user)
+    console.log('Od home ',user)
 
     setUser(user)
+    
 
     if(typeof(user)) 
     history.push('/myFestivals')
@@ -33,7 +34,8 @@ function Home() {
   };
 
   return (
-    <div>
+    
+    <div> 
       <Container className='cnt' text>
         <Header as='h1'>Welcome to the Festival Finder App</Header>
         <p>Find the right festival for you!</p>
