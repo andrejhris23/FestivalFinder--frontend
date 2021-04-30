@@ -10,11 +10,13 @@ const FestivalCard = ({f}) => {
 
     const handleSaveFestivalClick = (fest) => {
         console.log(fest)
-
         console.log(user)
+        
 
-        UsersAndFestivalsService.addFestivalToUser(fest, user.id);
+        UsersAndFestivalsService.addFestivalToUser(fest, user._id);
 
+
+        
     }
 
     return(
@@ -23,6 +25,7 @@ const FestivalCard = ({f}) => {
             <Grid.Column className='festival-card' key={f.name}> 
                 
                 <Card>
+                {console.log(f.dates)}
                 
                     {f.image ? 
                     <Image src={f.image} wrapped ui={false}/>
@@ -46,7 +49,7 @@ const FestivalCard = ({f}) => {
                                 className='fest-info-label'>
                                 Locations:</Label>
                             
-                            {f.locations.length === 0 ?
+                            {(!f.locations) ?
                             <p>/</p> :
                             f.locations.reduce((p, n)=> p+' | '+n)
                             }
@@ -59,8 +62,9 @@ const FestivalCard = ({f}) => {
                                 className='fest-info-label'>
                                 Dates:</Label>
 
-                            {f.dates.length === 0?
+                            {(!f.dates)?
                             <p>/</p>:
+                            
                             f.dates.reduce((p, n)=> p+' | '+n)                    
                             }
                             <br/>
@@ -70,7 +74,7 @@ const FestivalCard = ({f}) => {
                                 size='medium'
                                 className='fest-info-label'>
                                 Genres:</Label>
-                            {f.genres.length === 0?
+                            {(!f.genres)?
                             <p>/</p>:
                             ' '+f.genres.reduce((p, n)=> p+' | '+n)
                             }
@@ -81,16 +85,21 @@ const FestivalCard = ({f}) => {
                                 size='medium'
                                 className='fest-info-label'>
                                 Websites:</Label>
-                            {f.websites.map(ws => {
-                                return ws.length < 50 ?
-                                <div className='fstvl-website-link'>
-                                    <a href={ws}>{ws}</a>
-                                </div> :
-                                <div className='fstvl-website-link'>
-                                    <a href={ws}>{ws.slice(1,35)}...</a>
-                                </div>
-                                
-                            })}
+                            {(!f.websites)?
+
+                                <p>/</p> :
+                                f.websites.map(ws => {
+                                    return ws.length < 50 ?
+                                    <div className='fstvl-website-link'>
+                                        <a href={ws}>{ws}</a>
+                                    </div> :
+                                    <div className='fstvl-website-link'>
+                                        <a href={ws}>{ws.slice(1,35)}...</a>
+                                    </div>
+                                    
+                                })
+                            }
+                            
 
                             <div>
                                 <Button color='green'

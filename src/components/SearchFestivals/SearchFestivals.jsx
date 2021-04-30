@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { Container, Search, Dropdown , Label, Grid, Button, Modal } from 'semantic-ui-react';
 import usersAndFestivalsService from '../../service/usersAndFestivalsService';
+import { Link } from "react-router-dom";
 import './SearchFestivals.css'
 import 'semantic-ui-css/semantic.min.css';
 import FestivalCard from '../FestivalCards/FestivalCard';
@@ -103,6 +104,17 @@ const SearchFestivals = (props) => {
                                 >
                                     SEARCH
                                 </Button>
+
+                                <Link to='/myFestivals'>
+                                <Button 
+                                    secondary
+                                    onClick={handleSearchButtonClick}
+                                    size='big'
+                                    className=''
+                                >
+                                    My saved festivals
+                                </Button>
+                                </Link>
 
                                 <Modal open={showModal}>
                                     <Modal.Content>
