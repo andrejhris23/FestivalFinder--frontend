@@ -4,7 +4,7 @@
 
 .genre-dropdown {
     margin-bottom: 15px;
-    width: 50px;
+    border-radius: 30px !important;
 }
 
 .genre-dropdown-container{

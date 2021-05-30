@@ -24,7 +24,7 @@ const FestivalCard = ({f}) => {
             
             <Grid.Column className='festival-card' key={f.name}> 
                 
-                <Card>
+                <Card style={{overflow: 'auto', maxHeight: 420, minHeight: 420 }}>
                 
                     {f.image ? 
                     <Image src={f.image} wrapped ui={false}/>
@@ -34,60 +34,63 @@ const FestivalCard = ({f}) => {
                     <Card.Content>
                         <Card.Description>
                             <Label color='black'
-                                tag={true} 
                                 size='medium'
                                 className='fest-info-label'>
                                 Name:</Label>
                             {' '+f.name}
-                            <br/>
+                            
 
 
-                            <Label color='black'
-                                tag={true} 
+                            
+                            
+                            {(!f.locations || f.locations.length === 0) ?
+                            null :
+                            <div>
+                                <Label color='black' 
                                 size='medium'
                                 className='fest-info-label'>
                                 Locations:</Label>
-                            
-                            {(!f.locations || f.locations.length === 0) ?
-                            <p>/</p> :
-                            f.locations.reduce((p, n)=> p+' | '+n)
+                                {' '+f.locations.reduce((p, n)=> p+' | '+n)}
+                            </div>
                             }
                             
-                            <br/>
 
-                            <Label color='black'
-                                tag={true} 
+                            
+                            {(!f.dates || f.dates.length === 0)?
+                            null :
+                            <div>
+                                <Label color='black' 
                                 size='medium'
                                 className='fest-info-label'>
                                 Dates:</Label>
-
-                            {(!f.dates || f.dates.length === 0)?
-                            <p>/</p>:
-                            
-                            f.dates.reduce((p, n)=> p+' | '+n)                    
+                                {' '+f.dates.reduce((p, n)=> p+' | '+n)}
+                            </div>                    
                             }
-                            <br/>
 
-                            <Label color='black'
-                                tag={true} 
+                            
+                            {(!f.genres || f.genres.length === 0)?
+                            null :
+                            <div>
+                                <Label color='black' 
                                 size='medium'
                                 className='fest-info-label'>
                                 Genres:</Label>
-                            {(!f.genres || f.genres.length === 0)?
-                            <p>/</p>:
-                            ' '+f.genres.reduce((p, n)=> p+' | '+n)
+                                {' '+f.genres.reduce((p, n)=> p+' | '+n)}
+                            </div>
                             }
-                            <br/>
 
-                            <Label color='black'
-                                tag={true} 
-                                size='medium'
-                                className='fest-info-label'>
-                                Websites:</Label>
+                            
                             {(!f.websites  || f.websites.length === 0)?
 
-                                <p>/</p> :
-                                f.websites.map(ws => {
+                                null  :
+                                <div>
+                                    <Label color='black'
+ 
+                                    size='medium'
+                                    className='fest-info-label'>
+                                    Websites:</Label>
+
+                                    {f.websites.map(ws => {
                                     return ws.length < 50 ?
                                     <div className='fstvl-website-link'>
                                         <a href={ws}>{ws}</a>
@@ -96,7 +99,10 @@ const FestivalCard = ({f}) => {
                                         <a href={ws}>{ws.slice(1,35)}...</a>
                                     </div>
                                     
-                                })
+                                    })}
+
+                                </div>
+                                
                             }
                             
 
