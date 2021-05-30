@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Container, Search, Dropdown , Label, Grid, Button, Modal } from 'semantic-ui-react';
+import { Container, Search, Dropdown , Label, Grid, Button, Modal, Header } from 'semantic-ui-react';
 import usersAndFestivalsService from '../../service/usersAndFestivalsService';
 import { Link } from "react-router-dom";
 import './SearchFestivals.css'
@@ -75,26 +75,29 @@ const SearchFestivals = (props) => {
 
                         <Grid.Row columns={2}>
 
-                            <Grid.Column width='2'>
-                                <Label color='black' size='huge' className='search-fest-label'>SEARCH COUNTRY:</Label>
-                                <br/><br/>
+                            <Grid.Column width='3'>
+                                <Header as='h2'>SEARCH COUNTRY:</Header>
+                                
                                 <Search
                                     type='text'
                                     size='big'
                                     showNoResults={false}
                                     onSearchChange={handleCountrySearchChange}
                                     className='search-bar'
+                                    fluid
                                 />
                         
-                                <Dropdown
-                                    placeholder='Select Genre'
-                                    fluid
-                                    search
-                                    selection
-                                    options={genreOptions}
-                                    onChange={handleGenreChange}
-                                    className='genre-dropdown'
-                                />
+                                <div className='genre-dropdown-container'>
+                                    <Dropdown
+                                        placeholder='Select Genre'
+                                        fluid
+                                        search
+                                        selection
+                                        options={genreOptions}
+                                        onChange={handleGenreChange}
+                                        className='genre-dropdown'
+                                    />
+                                </div>
 
                                 <Button 
                                     secondary
@@ -102,7 +105,7 @@ const SearchFestivals = (props) => {
                                     size='big'
                                     className=''
                                 >
-                                    SEARCH
+                                    Search
                                 </Button>
 
                                 <Link to='/myFestivals'>
@@ -112,7 +115,7 @@ const SearchFestivals = (props) => {
                                     size='big'
                                     className=''
                                 >
-                                    My saved festivals
+                                    My festivals
                                 </Button>
                                 </Link>
 
@@ -128,10 +131,10 @@ const SearchFestivals = (props) => {
                                 </Modal>
                             </Grid.Column>
 
-                            <Grid.Column>
+                            <Grid.Column width='7' className=''>
 
                                     {/* Uste eden grid za festivalite */}
-                                    <Grid className='festivals-grid' columns={3}>
+                                    <Grid className='' columns={3}>
                                         <Grid.Row>
                                             
                                             {

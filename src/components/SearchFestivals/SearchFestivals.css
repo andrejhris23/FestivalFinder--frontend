@@ -4,6 +4,11 @@
 
 .genre-dropdown {
     margin-bottom: 15px;
+    width: 50px;
+}
+
+.genre-dropdown-container{
+    width: 260px;
 }
 
 .search-elements {
@@ -19,9 +24,7 @@
     width: 2000px;
 }
 
-.fest-info-label{
 
-}
 
 .fstvl-website-link{
     width: 10px;
