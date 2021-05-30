@@ -15,9 +15,9 @@ const MyFestivals = () => {
     }, []);
 
     const waitUser = async() => {
-        console.log('Use eff myFestivals')
+        // console.log('Use eff myFestivals')
         const user  = await authService.fetchUser();
-        console.log(user)
+        // console.log(user)
         setUser(user)
     }
 
@@ -55,7 +55,7 @@ const MyFestivals = () => {
 
                                     user.festivals.map(
                                         fest => 
-                                        <FestivalCard f={fest}/>
+                                        <FestivalCard f={fest} key={fest._id}/>
                                     )
 
                             : <Label color='red' 

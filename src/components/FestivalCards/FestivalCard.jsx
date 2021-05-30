@@ -25,7 +25,6 @@ const FestivalCard = ({f}) => {
             <Grid.Column className='festival-card' key={f.name}> 
                 
                 <Card>
-                {console.log(f.dates)}
                 
                     {f.image ? 
                     <Image src={f.image} wrapped ui={false}/>
@@ -49,7 +48,7 @@ const FestivalCard = ({f}) => {
                                 className='fest-info-label'>
                                 Locations:</Label>
                             
-                            {(!f.locations) ?
+                            {(!f.locations || f.locations.length === 0) ?
                             <p>/</p> :
                             f.locations.reduce((p, n)=> p+' | '+n)
                             }
@@ -62,7 +61,7 @@ const FestivalCard = ({f}) => {
                                 className='fest-info-label'>
                                 Dates:</Label>
 
-                            {(!f.dates)?
+                            {(!f.dates || f.dates.length === 0)?
                             <p>/</p>:
                             
                             f.dates.reduce((p, n)=> p+' | '+n)                    
@@ -74,7 +73,7 @@ const FestivalCard = ({f}) => {
                                 size='medium'
                                 className='fest-info-label'>
                                 Genres:</Label>
-                            {(!f.genres)?
+                            {(!f.genres || f.genres.length === 0)?
                             <p>/</p>:
                             ' '+f.genres.reduce((p, n)=> p+' | '+n)
                             }
@@ -85,7 +84,7 @@ const FestivalCard = ({f}) => {
                                 size='medium'
                                 className='fest-info-label'>
                                 Websites:</Label>
-                            {(!f.websites)?
+                            {(!f.websites  || f.websites.length === 0)?
 
                                 <p>/</p> :
                                 f.websites.map(ws => {

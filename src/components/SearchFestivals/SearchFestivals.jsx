@@ -38,7 +38,7 @@ const SearchFestivals = (props) => {
     const handleCountrySearchChange = (e) => {
         e.preventDefault();
         const theCountry = e.target.value;
-        const theCountryFormated = theCountry.replace(' ','_');
+        const theCountryFormated = theCountry.replaceAll(' ','_');
     
         setCountry(theCountryFormated);
     }
@@ -144,7 +144,7 @@ const SearchFestivals = (props) => {
 
                                                     festivals.map(
                                                         fest => 
-                                                        <FestivalCard f={fest}/>
+                                                        <FestivalCard f={fest} key={fest._id}/>
                                                     )
 
                                                     
