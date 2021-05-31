@@ -2,7 +2,7 @@ import { Label, Grid, Button, Card, Image } from 'semantic-ui-react';
 import { useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
 import UsersAndFestivalsService from '../../service/usersAndFestivalsService';
-
+import './FestivalCard.css'
 
 const FestivalCard = ({f}) => {
 
@@ -33,7 +33,7 @@ const FestivalCard = ({f}) => {
                     }
                     <Card.Content>
                         <Card.Description>
-                            <Label color='black'
+                            <Label 
                                 size='medium'
                                 className='fest-info-label'>
                                 Name:</Label>
@@ -46,7 +46,7 @@ const FestivalCard = ({f}) => {
                             {(!f.locations || f.locations.length === 0) ?
                             null :
                             <div>
-                                <Label color='black' 
+                                <Label 
                                 size='medium'
                                 className='fest-info-label'>
                                 Locations:</Label>
@@ -59,7 +59,7 @@ const FestivalCard = ({f}) => {
                             {(!f.dates || f.dates.length === 0)?
                             null :
                             <div>
-                                <Label color='black' 
+                                <Label 
                                 size='medium'
                                 className='fest-info-label'>
                                 Dates:</Label>
@@ -71,7 +71,7 @@ const FestivalCard = ({f}) => {
                             {(!f.genres || f.genres.length === 0)?
                             null :
                             <div>
-                                <Label color='black' 
+                                <Label 
                                 size='medium'
                                 className='fest-info-label'>
                                 Genres:</Label>
@@ -84,7 +84,7 @@ const FestivalCard = ({f}) => {
 
                                 null  :
                                 <div>
-                                    <Label color='black'
+                                    <Label
  
                                     size='medium'
                                     className='fest-info-label'>
