@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Input, Menu } from 'semantic-ui-react';
+import { Button, Input, Menu } from 'semantic-ui-react';
 import { useHistory } from "react-router-dom";
+import './Menu.css';
 
 const MyMenu = () => {
 
@@ -20,22 +21,23 @@ const MyMenu = () => {
         <div>
             <Menu pointing 
                 fixed='top'
+                secondary
                 size='small'>
-            <Menu.Item
-                name='search'
-                active={activeItem === 'search'}
-                onClick={handleItemClick}
-            />
-            <Menu.Item
-                name='myFestivals'
-                active={activeItem === 'myFestivals'}
-                onClick={handleItemClick}
-            />
-            <Menu.Menu position='right'>
-                <Menu.Item>
-                <Input icon='search' placeholder='Search...' />
-                </Menu.Item>
-            </Menu.Menu>
+                <Menu.Item
+                    name='search'
+                    active={activeItem === 'search'}
+                    onClick={handleItemClick}
+                />
+                <Menu.Item
+                    name='myFestivals'
+                    active={activeItem === 'myFestivals'}
+                    onClick={handleItemClick}
+                />
+                <Menu.Menu position='right'>
+                    <Menu.Item>
+                        <Button>Log Out</Button>
+                    </Menu.Item>
+                </Menu.Menu>
             </Menu>
         </div>
     )
