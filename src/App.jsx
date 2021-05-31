@@ -5,6 +5,7 @@ import SearchFestivals from "../src/components/SearchFestivals/SearchFestivals";
 import Home from "./components/Home/Home";
 import { UserContext } from './contexts/UserContext';
 import MyFestivals from '../src/components/MyFestivals/MyFestivals';
+import Menu from '../src/components/Menu/Menu'
 
 
 function App() {
@@ -12,7 +13,10 @@ function App() {
   const [user, setUser] = useState({});
   
   return (
+    
     <BrowserRouter>
+      <Menu/>
+      <br/>
       <Switch>
         <UserContext.Provider value={{user, setUser}}>
           <Route path="/" exact component={Home} />
