@@ -3,6 +3,7 @@ import React, { useContext, useEffect } from "react";
 import { UserContext } from '../../contexts/UserContext';
 import { Link } from "react-router-dom";
 import FestivalCard from '../FestivalCards/FestivalCard';
+import MySavedFestivalCard from './MySavedFestivalCard';
 import authService from "../../service/authService";
 import './MyFestivals.css';
 
@@ -49,9 +50,13 @@ const MyFestivals = () => {
                                             No festivals saved yet!</Label> :
 
 
+                                            // user.festivals.map(
+                                            //     fest => 
+                                            //     <FestivalCard f={fest} key={fest._id}/>
+                                            // )
                                             user.festivals.map(
                                                 fest => 
-                                                <FestivalCard f={fest} key={fest._id}/>
+                                                <MySavedFestivalCard f={fest} key={fest._id}/>
                                             )
 
                                     : <Label color='red' 
